@@ -34,7 +34,7 @@ func NewMers64Arr(keys []uint64) *mt64 {
 	return initMers64A(r, keys)
 }
 
-// Float64c creates a new random number in the close interval [1,1]
+// Float64c creates a new random number in the close interval [0,1]
 func Float64c(r Rander) float64 {
 	return float64(r.Int64()>>11) * (1.0 / 9007199254740991.0)
 }
