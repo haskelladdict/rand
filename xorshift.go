@@ -59,12 +59,18 @@ func (r *rand1024) Int64() uint64 {
 // Specialized member functions for maximum performance. This avoids going
 // through the Rander interface which slows things down by a factor of two
 // for xorshift1024*
-// Float64 creates a new random number in the close interval [0,1]
+
+// Int64 generates a random number on [0, 2^63-1]
+func (r *rand1024) Int63() int64 {
+	return (int64)(r.Int64() >> 1)
+}
+
+// Float64 generates a random number in the closed interval [0,1]
 func (r *rand1024) Float64c() float64 {
 	return float64(r.Int64()>>11) * (1.0 / 9007199254740991.0)
 }
 
-// Float64 creates a new random number in the open interval [0,1)
+// Float64 generates a random number in the open interval [0,1)
 func (r *rand1024) Float64() float64 {
 	return float64(r.Int64()>>11) * (1.0 / 9007199254740992.0)
 }
